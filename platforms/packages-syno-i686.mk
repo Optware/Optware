@@ -12,7 +12,7 @@ SPECIFIC_PACKAGES = \
 BROKEN_PACKAGES = \
 	$(PACKAGES_ONLY_WORK_ON_LINUX24) \
 	atftp btg dialog ecl \
-	iptraf ivorbis-tools lcd4linux ldconfig libcapi20 \
+	ivorbis-tools lcd4linux ldconfig libcapi20 \
 	mpdscribble nagios-plugins ntop opendchub \
 	puppy qemu \
 	samba samba34 samba35 samba36 \

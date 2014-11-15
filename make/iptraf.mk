@@ -21,7 +21,7 @@
 # "NSLU2 Linux" other developers will feel free to edit.
 #
 IPTRAF_SITE=ftp://iptraf.seul.org/pub/iptraf
-IPTRAF_VERSION=3.0.0
+IPTRAF_VERSION=3.0.1
 IPTRAF_SOURCE=iptraf-$(IPTRAF_VERSION).tar.gz
 IPTRAF_DIR=iptraf-$(IPTRAF_VERSION)
 IPTRAF_UNZIP=zcat
@@ -51,6 +51,10 @@ $(IPTRAF_SOURCE_DIR)/src-Makefile.patch \
 $(IPTRAF_SOURCE_DIR)/support-Makefile.patch \
 $(IPTRAF_SOURCE_DIR)/src-install.sh.patch \
 $(IPTRAF_SOURCE_DIR)/ixp.patch \
+
+ifeq ($(OPTWARE_TARGET), syno-i686)
+  IPTRAF_PATCHES += $(IPTRAF_SOURCE_DIR)/src-tr.c.syno-i686.patch
+endif
 
 #
 # If the compilation of the package requires additional

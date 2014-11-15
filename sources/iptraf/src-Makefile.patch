@@ -1,6 +1,14 @@
---- src/Makefile.orig	2005-09-13 02:11:17.000000000 -0700
-+++ src/Makefile	2007-09-02 11:06:42.000000000 -0700
-@@ -39,7 +39,7 @@
+--- src/Makefile.orig	2014-11-05 10:20:08.878745475 -0800
++++ src/Makefile	2014-11-05 10:21:03.849151900 -0800
+@@ -32,14 +32,14 @@
+ # modified (except for -m486 on non-Intel x86 platforms).
+ 
+ CFLAGS		= -Wall #-O2 #-m486
+-DIRS		= -DWORKDIR=\"$(WORKDIR)\" \
++DIRS		= -DWORKDIR=\"$(WORKDIR)\" -DLOCKDIR=\"$(LOCKDIR)\" \
+ 		  -DLOGDIR=\"$(LOGDIR)\" -DEXECDIR=\"$(TARGET)\"
+ LDOPTS		= #-static
+ 
  # you may want to change this to point to your ncurses include directory
  # if the ncurses include files are not in the default location.
  

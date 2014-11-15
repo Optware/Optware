@@ -1,0 +1,11 @@
+--- src/tr.c.orig	2014-11-05 09:40:16.221208533 -0800
++++ src/tr.c	2014-11-05 09:31:42.581154534 -0800
+@@ -8,7 +8,7 @@
+ 
+ #include <asm/types.h>
+ #include <linux/if_tr.h>
+-#include <netinet/in.h>
++/*#include <netinet/in.h>*/
+ 
+ unsigned int get_tr_ip_offset(unsigned char *pkt)
+ {
