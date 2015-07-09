@@ -1,0 +1,20 @@
+--- expect-5.43/Makefile.in.orig	2004-05-07 14:10:30.000000000 -0400
++++ expect-5.43/Makefile.in	2015-07-08 13:48:37.650743199 -0400
+@@ -101,7 +101,7 @@
+ # to be different than those used for actually reference files at
+ # run-time.  INSTALL_ROOT is prepended to $prefix and $exec_prefix
+ # when installing files.
+-INSTALL_ROOT =
++#INSTALL_ROOT =
+ 
+ # The following Expect scripts are not necessary to have installed as
+ # commands, but are very useful.  Edit out what you don't want installed.
+@@ -197,7 +197,7 @@
+ AR = ar
+ ARFLAGS = cr
+ 
+-LOCAL_EXPECT=LD_LIBRARY_PATH=.:@TCL_EXEC_PREFIX@/lib:$(tcl_libdir):$$LD_LIBRARY_PATH ./expect
++LOCAL_EXPECT=LD_LIBRARY_PATH=$(STAGING_LIB_DIR):.:@TCL_EXEC_PREFIX@/lib:$(tcl_libdir):$$LD_LIBRARY_PATH ./expect
+ 
+ # These definitions are used by the "subdirs_do" target to pass
+ # the compile flags down recursively.

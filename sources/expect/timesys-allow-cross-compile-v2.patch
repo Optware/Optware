@@ -1,0 +1,125 @@
+--- expect-5.43/configure.in.orig	2009-03-16 13:32:44.000000000 -0400
++++ expect-5.43/configure.in	2009-03-16 13:38:03.000000000 -0400
+@@ -639,7 +639,7 @@
+ ,
+ 	AC_MSG_RESULT(no)
+ ,
+-	AC_MSG_ERROR([Expect can't be cross compiled])
++	AC_MSG_RESULT(no)
+ )
+ 
+ AC_MSG_CHECKING([if any value exists for WNOHANG])
+@@ -664,7 +664,9 @@
+ 	AC_MSG_RESULT(no)
+ 	AC_DEFINE(WNOHANG_BACKUP_VALUE, 1)
+ ,
+-	AC_MSG_ERROR([Expect can't be cross compiled])
++	AC_MSG_RESULT(yes)
++	AC_DEFINE_UNQUOTED(WNOHANG_BACKUP_VALUE, 1)
++	rm -f wnohang
+ )
+ 
+ #-----Stolen from Tcl's configure file-------------------------------
+@@ -755,7 +755,8 @@
+ 	AC_DEFINE(REARM_SIG)
+ ,
+ 	AC_MSG_RESULT(no)
+-, AC_MSG_WARN([Expect can't be cross compiled])
++,
++	AC_MSG_RESULT(no)
+ )
+ 
+ # HPUX7 has trouble with the big cat so split it
+@@ -920,7 +921,9 @@
+ ,
+         AC_MSG_RESULT(no)
+ ,
+-	AC_MSG_ERROR([Expect can't be cross compiled])
++        AC_MSG_RESULT(yes)
++        AC_DEFINE(HAVE_SGTTYB)
++        PTY_TYPE=sgttyb
+ )
+ 
+ # mach systems have include files for unimplemented features
+@@ -947,7 +947,9 @@
+ ,
+         AC_MSG_RESULT(no)
+ ,
+-	AC_MSG_ERROR([Expect can't be cross compiled])
++        AC_DEFINE(HAVE_TERMIO)
++        PTY_TYPE=termios
++        AC_MSG_RESULT(yes)
+ )
+ 
+   # now check for the new style ttys (not yet posix)
+@@ -969,7 +971,9 @@
+   ,
+         AC_MSG_RESULT(no)
+   ,
+-	AC_MSG_ERROR([Expect can't be cross compiled])
++        AC_DEFINE(HAVE_TERMIOS)
++        PTY_TYPE=termios
++        AC_MSG_RESULT(yes)
+   )
+ fi
+ 
+@@ -996,7 +996,7 @@
+ ,
+ 	AC_MSG_RESULT(no)
+ ,
+-	AC_MSG_ERROR([Expect can't be cross compiled])
++	AC_MSG_RESULT(no)
+ )
+ 
+ AC_MSG_CHECKING([if TIOCGWINSZ in termios.h])
+@@ -1018,7 +1018,7 @@
+ ,
+ 	AC_MSG_RESULT(no)
+ ,
+-	AC_MSG_ERROR([Expect can't be cross compiled])
++	AC_MSG_RESULT(no)
+ )
+ 
+ # finally check for Cray style ttys
+@@ -1039,7 +1039,7 @@
+ ,
+ 	AC_MSG_RESULT(no)
+ ,
+-	AC_MSG_ERROR([Expect can't be cross compiled])
++	AC_MSG_RESULT(no)
+ )
+ 
+ #
+@@ -1071,7 +1071,9 @@
+ AC_HAVE_FUNCS(getpty)
+ 
+ # following test sets SETPGRP_VOID if setpgrp takes 0 args, else takes 2
+-AC_FUNC_SETPGRP
++cat >>expect_cf.h <<\_ACEOF
++#define SETPGRP_VOID 1
++_ACEOF
+ 
+ #
+ # check for timezones
+@@ -1091,7 +1091,9 @@
+ 	AC_MSG_RESULT(yes),
+ 	AC_MSG_RESULT(no)
+ ,
+-	AC_MSG_ERROR([Expect can't be cross compiled])
++	AC_DEFINE(HAVE_SV_TIMEZONE)
++	AC_MSG_RESULT(yes),
++	AC_MSG_RESULT(no)
+ )
+ 
+ # only look for Tk stuff if we have X11 and user doesn't say not to
+--- expect-5.45/expect_cf.h.in.orig	2009-03-25 14:37:54.000000000 -0400
++++ expect-5.45/expect_cf.h.in	2009-03-25 14:38:14.000000000 -0400
+@@ -27,7 +27,7 @@
+ #undef pid_t
+ #undef RETSIGTYPE
+ #undef TIME_WITH_SYS_TIME	/* ok to include both time.h and sys/time.h */
+-#undef SETPGRP_VOID		/* if setpgrp takes 0 args */
++#define SETPGRP_VOID 1		/* if setpgrp takes 0 args */
+ 
+ /*
+  * This section is for compile macros needed by
