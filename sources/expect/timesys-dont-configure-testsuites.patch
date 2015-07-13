@@ -1,0 +1,11 @@
+--- expect-5.43/configure.in.orig	2009-03-16 15:16:51.000000000 -0400
++++ expect-5.43/configure.in	2009-03-16 15:17:05.000000000 -0400
+@@ -119,7 +119,7 @@
+ UNSHARED_RANLIB=$RANLIB
+ 
+ # these are the other subdirectories we need to configure
+-AC_CONFIG_SUBDIRS(testsuite)
++# AC_CONFIG_SUBDIRS(testsuite)
+ 
+ # This is for LynxOS, which needs a flag to force true POSIX when
+ # building.  The flag varies depending how old the compiler is.
